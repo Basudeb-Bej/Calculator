@@ -1,46 +1,73 @@
   body {
-    align-items: center;
-    justify-content: center;
-    display: flex;
+    display: grid;
     height: 100dvh;
     background-color: #17182A;
     place-items: center;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    position: fixed;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  :root {
+    --b-w: 83%;
   }
   .dis {
-    margin: 4px;    
     border-radius: 50%;
-    width: 33px;
-    height: 33px;
+    width: var(--b-w);
+    aspect-ratio: 1.2 / 1;
     border: none;
     background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0px 3px 6px black;
+    box-shadow: inset 0px 2px 20px 3px #0009, 0px 2px 10px #0004;
     background-color: #6D6F86;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
+    color: #ddd;
+    font-weight: 900;
+    font-size: 1.2rem;
+    user-select: none;
+  }
+  .dis:active {
+    box-shadow: inset 0px 2px 20px #0009;
   }
   fieldset {
-    width: 180px;
-    height: 270px;
+    width: clamp(300px, 90%, 380px);
+    aspect-ratio: 1 / 1.5;
     background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0px 15px 25px black;
+    box-shadow: 0px 10px 35px #0005;
     border-radius: 10px;
     border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  .keys {
+    display: grid;
+    gap: 0;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px 0px;
+    justify-items: center;
+    justify-self: flex-end;
+  }
+  .print {
+    aspect-ratio: 2.4 / 1;
+    display: grid;
+    place-items: center;
+
   }
   input {
-    height: 40px;
-    width: 170px;
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0px 4px 8px black;
-    background-color: black;
+    width: 98%;
+    height: 80%;
+    box-shadow: 0px 4px 40px #0003;
+    background-color: #1117;
+    box-shadow: inset 0px 0px 20px 1px #0004;
+    outline: none;
+    border: none;
+    font-size: clamp(30px, 15vw, 70px);
     border-radius: 10px;
-    margin-bottom: 20px;
-    color: white;
+    color: #dddd;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 0 5px;
   }
-  #color {
+  .color {
     background-color: #3C3C4B;
   }
