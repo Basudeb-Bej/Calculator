@@ -2,41 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Calculator</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Calculator</title>
+  <<link rel="stylesheet" href="style.css">
 </head>
 <body>
- <div class="box">
- <fieldset>
-  <input type="text" id="1" class="calculator-screen" readonly />
-
-  <br>
-  <button id="color" class="dis" onclick="cal('AC')">AC</button>
-  <button id="color" class="dis" onclick="cal('%')">%</button>
-  <button id="color" class="dis" onclick="cal('C')">C</button>
-  <button id="color" class="dis" onclick="cal('/')">÷</button>
-  <button class="dis" onclick="cal('7')">7</button>
-  <button class="dis" onclick="cal('8')">8</button>
-  <button class="dis" onclick="cal('9')">9</button>
-  <button id="color" class="dis" onclick="cal('*')">×</button>
-  <button class="dis" onclick="cal('4')">4</button>
-  <button class="dis" onclick="cal('5')">5</button>
-  <button class="dis" onclick="cal('6')">6</button>
-  <button id="color" class="dis" onclick="cal('-')">-</button>
-  <button class="dis" onclick="cal('1')">1</button>
-  <button class="dis" onclick="cal('2')">2</button>
-  <button class="dis" onclick="cal('3')">3</button>
-  <button id="color" class="dis" onclick="cal('+')">+</button>
-  <button class="dis" onclick="cal('00')">00</button>
-  <button class="dis" onclick="cal('0')">0</button>
-  <button class="dis" onclick="cal('.')">.</button>
-  <button style="background-color: #FA9305" class="dis" onclick="calculator ()">=</button>
-  </fieldset>
+  <div class="box">
+  <div class="calculator-container">
+    <button class="history-btn" onclick="toggleHistory()">📜</button>
+    
+    <div class="calculator-screen" id="screen"></div>
+    
+    <div class="calculator-keys">
+      <button class="calculator-btn clear" onclick="clearAll()">AC</button>
+      <button class="calculator-btn function" onclick="backspace()">⌫</button>
+      <button class="calculator-btn function" onclick="appendToScreen('%')">%</button>
+      <button class="calculator-btn operator" onclick="appendToScreen('/')">÷</button>
+      
+      <button class="calculator-btn" onclick="appendToScreen('7')">7</button>
+      <button class="calculator-btn" onclick="appendToScreen('8')">8</button>
+      <button class="calculator-btn" onclick="appendToScreen('9')">9</button>
+      <button class="calculator-btn operator" onclick="appendToScreen('*')">×</button>
+      
+      <button class="calculator-btn" onclick="appendToScreen('4')">4</button>
+      <button class="calculator-btn" onclick="appendToScreen('5')">5</button>
+      <button class="calculator-btn" onclick="appendToScreen('6')">6</button>
+      <button class="calculator-btn operator" onclick="appendToScreen('-')">-</button>
+      
+      <button class="calculator-btn" onclick="appendToScreen('1')">1</button>
+      <button class="calculator-btn" onclick="appendToScreen('2')">2</button>
+      <button class="calculator-btn" onclick="appendToScreen('3')">3</button>
+      <button class="calculator-btn operator" onclick="appendToScreen('+')">+</button>
+      
+      <button class="calculator-btn" onclick="appendToScreen('00')">00</button>
+      <button class="calculator-btn" onclick="appendToScreen('0')">0</button>
+      <button class="calculator-btn" onclick="appendToScreen('.')">.</button>
+      <button class="calculator-btn equals" onclick="calculate()">=</button>
+    </div>
+    
+    <div class="history-panel" id="historyPanel">
+      <div class="history-header">
+        <h2 class="history-title">Calculation History</h2>
+        <button class="close-history" onclick="toggleHistory()">×</button>
+      </div>
+      <div id="historyList"></div>
+    </div>
   </div>
-  
+  </div>
+
   <script src="main.js"></script>
 </body>
 </html>
