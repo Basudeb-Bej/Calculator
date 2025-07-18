@@ -59,8 +59,8 @@ input {
 
 .box {
     position: relative;
-    width: 405px;
-    height: 590px;
+    width: 395px;
+    height: 580px;
     align-items: center;
     justify-content: center;
     display: flex;
