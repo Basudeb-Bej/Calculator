@@ -1,97 +1,308 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
-    background-color: #17182A;
-    margin: 0;
-}
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #10b981;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --gray: #94a3b8;
+      --calculator-bg: #1e1e2e;
+      --button-bg: #2d2d42;
+      --operator-bg: #3a3a5a;
+      --equals-bg: #fa9305;
+      --text-light: #ffffff;
+      --text-dark: #1e293b;
+    }
 
-.dis {
-    margin: 6.5px;    
-    border-radius: 50%;
-    width: 75px;
-    height: 75px;
-    border: none;
-    font-size: 30px;
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0px 3px 6px black;
-    background-color: #6D6F86;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
 
-fieldset {
-    width: 300px;
-    height: 560px;
-    background-color: #3F4055;
-    box-shadow: 0px 2px 13px #0006;
-    border-radius: 20px;
-    border: none;
-    overflow: hidden;
-    position: relative;
-}
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      padding: 20px;
+    }
 
-input {
-    height: 90px;
-    width: 340px;
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0px 2px 4px black;
-    background-color: black;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    font-size: 60px;
-    color: white;
-    margin: 10px;
-}
+    .calculator-container {
+      width: 100%;
+      max-width: 380px;
+      background: var(--calculator-bg);
+      border-radius: 20px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
 
-#color {
-    background-color: #3C3C4B;
-}
+    .calculator-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+      transform: rotate(45deg);
+      z-index: -1;
+      animation: shine 6s linear infinite;
+    }
 
-@media (min-width: 1000px) {
-  fieldset{
-    width: 100px;
-    height: 300px;
-  }
-}
+    @keyframes shine {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
 
-.box {
-    position: relative;
-    width: 395px;
-    height: 580px;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    background-color: #000000;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0px 3px 3px black;
-  }
-    
-.box::before {
-    content: '';
-    position: absolute;
-    width: 200px;
-    height: 700px;
-    background: linear-gradient(#00ccff, #d500f9);
-    animation: rotate 4s linear infinite;
-  }
-  
-  @keyframes rotate {
-      from {
-        transform: rotate(0deg);
+    .calculator-screen {
+      width: 100%;
+      height: 150px;
+      padding: 20px;
+      text-align: right;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--text-light);
+      background: rgba(0, 0, 0, 0.2);
+      border: none;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .calculator-screen.overflow {
+      font-size: 2.8rem;
+    }
+
+    .calculator-screen.overflow-more {
+      font-size: 2rem;
+    }
+
+    .calculator-keys {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 20px;
+    }
+
+    .calculator-btn {
+      height: 70px;
+      border-radius: 12px;
+      border: none;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--text-light);
+      background: var(--button-bg);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 1px 2px black;
+    }
+
+    .calculator-btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      border-radius: 100%;
+      transform: scale(1, 1) translate(-50%);
+      transform-origin: 50% 50%;
+    }
+
+    .calculator-btn:focus:not(:active)::after {
+      animation: ripple 0.6s ease-out;
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
       }
-      to {
-        transform: rotate(360deg);
+      100% {
+        transform: scale(20, 20);
+        opacity: 0;
       }
     }
-   
-.calculator-screen.overflow {
-    font-size: 40px;
-}
 
-.calculator-screen.overflow-more {
-    font-size: 30px; 
-}
+    .calculator-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .calculator-btn:active {
+      transform: translateY(0);
+    }
+
+    .operator {
+      background: var(--operator-bg);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .equals {
+      background: var(--equals-bg);
+      color: white;
+      font-weight: 600;
+      grid-column: span 1;
+    }
+
+    .clear {
+      color: #ef4444;
+    }
+
+    .function {
+      color: var(--secondary);
+    }
+
+    .history-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .history-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .history-panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--calculator-bg);
+      padding: 20px;
+      overflow-y: auto;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 10;
+    }
+
+    .history-panel.active {
+      transform: translateX(0);
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .history-title {
+      font-size: 1.5rem;
+      color: var(--text-light);
+    }
+
+    .close-history {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .history-item {
+      padding: 10px;
+      margin-bottom: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .history-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .history-expression {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    .history-result {
+      font-size: 1.2rem;
+      font-weight: 500;
+      text-align: right;
+    }
+
+    @media (max-width: 480px) {
+      .calculator-container {
+        max-width: 100%;
+        height: 77vh;
+        border-radius: 10px;
+      }
+      
+      .calculator-screen {
+        height: 15vh;
+        padding: 10px 20px;
+      }
+      
+      .calculator-keys {
+        height: 60vh;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        padding: 10px;
+      }
+      
+      .calculator-btn {
+        height: 80px;
+        min-height: 60px;
+        font-size: 2rem;
+      }
+    }
+
+     .box {
+        position: relative;
+        width: 383px;
+        height: 583px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        background-color: #000000;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0px 3px 3px black;
+      }
+        
+    .box::before {
+        content: '';
+        position: absolute;
+        width: 200px;
+        height: 700px;
+        background: linear-gradient(#00ccff, #d500f9);
+        animation: rotate 4s linear infinite;
+      }
+      
+      @keyframes rotate {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+      }
